@@ -23,7 +23,7 @@ public class SplashActivity extends FragmentActivity {
                 afterSplash();
                 finish();
             }
-        },3000);
+        },1000);
     }
     void afterSplash()
     {
