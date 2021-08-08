@@ -13,8 +13,13 @@ public class ViewModelFestival extends ViewModel {
     MutableLiveData<ArrayList<Festival>> festLiveData;
     FestivalRepository festivalRepository;
 
-    ViewModelFestival() {
+    public ViewModelFestival () {
+        festivalRepository = new FestivalRepository().getInstance();
+    }
 
+    public MutableLiveData<ArrayList<Festival>> getMutableLiveData() {
+        festLiveData = festivalRepository.getFestivals();
+        return festLiveData;
     }
 
 }

@@ -17,17 +17,17 @@ public class FestivalRepository {
         return instance;
     }
 
-    public ArrayList<Festival> getFestivals() {
+    public MutableLiveData<ArrayList<Festival>> getFestivals() {
         setData();
         MutableLiveData<ArrayList<Festival>> data = new MutableLiveData<>();
         data.setValue(this.data);
-        return this.data;
+        return data;
     }
 
     private void setData() {
-        String name[] = {"Diwali", "Holi", "Onam", "Maha Shivaratri", "Krishna Janmashtami",
+        String[] name = {"Diwali", "Holi", "Onam", "Maha Shivaratri", "Krishna Janmashtami",
                 "Makar Sankranti", "Ganesh Chaturthi", "Navratri – Dussehra – Durga Puja", "Rama Navami", "Ugadi"};
-        String description[] = {
+        String[] description = {
                 "The festival of lights – Diwali or Deepavali – is the most popular festival on the Indian subcontinent.",
                 "Holi is a festival of colour and a harbinger of spring in India. The onset of Holi is marked by the burning of an effigy of Holika – an evil entity from Hindu mythology – to signify the triumph of good over evil.",
                 "Onam is the official state festival of Kerala, and is celebrated with the utmost fervour and festivities that include traditional sports like boat races and tug of war.",
@@ -51,8 +51,21 @@ public class FestivalRepository {
                 "https://img.theculturetrip.com/1440x/smart/wp-content/uploads/2019/07/fxftdt.jpg",
                 "https://img.theculturetrip.com/1440x/smart/wp-content/uploads/2019/07/eaey4g.jpg"
         };
+        String[] place = {
+                "India",
+                "India",
+                "India",
+                "India",
+                "India",
+                "India",
+                "India",
+                "India",
+                "India",
+                "India",
+
+        };
         for (int i = 0; i < 10; i++) {
-            data.add(new Festival(imgUri[i], name[i], description[i]));
+            data.add(new Festival(imgUri[i], "Name : "+name[i],"Place : "+place[i], description[i]));
         }
 
     }

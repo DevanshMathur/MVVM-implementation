@@ -5,11 +5,13 @@ import android.net.Uri;
 public class Festival {
     String uri;
     String name;
+    String place;
     String description;
 
-    public Festival(String uri, String name, String description) {
+    public Festival(String uri, String name, String place, String description) {
         this.uri = uri;
         this.name = name;
+        this.place = place;
         this.description = description;
     }
 
@@ -27,6 +29,14 @@ public class Festival {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
     }
 
     public String getDescription() {

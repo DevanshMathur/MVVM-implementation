@@ -38,6 +38,7 @@ public class FestivalAdapter extends RecyclerView.Adapter<FestivalAdapter.ViewHo
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 
         viewHolder.name.setText(festivals.get(position).getName());
+        viewHolder.place.setText(festivals.get(position).getPlace());
         viewHolder.desc.setText(festivals.get(position).getDescription());
         Glide.with(mContext)
                 .load(festivals.get(position).getUri())
@@ -51,6 +52,7 @@ public class FestivalAdapter extends RecyclerView.Adapter<FestivalAdapter.ViewHo
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView name;
+        private TextView place;
         private TextView desc;
         private ImageView img;
 
@@ -58,8 +60,10 @@ public class FestivalAdapter extends RecyclerView.Adapter<FestivalAdapter.ViewHo
             super(view);
 
             name = view.findViewById(R.id.tv_fest_name);
+            place = view.findViewById(R.id.tv_fest_place);
             desc = view.findViewById(R.id.tv_fest_desc);
             img = view.findViewById(R.id.iv_fest_img);
+
         }
 
     }
