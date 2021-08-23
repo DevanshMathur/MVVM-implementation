@@ -4,7 +4,7 @@
     android:innerRadius="200dp">
 
     <stroke
-        android:width="2dp"
+        android:width="4dp"
         android:color="@color/black"/>
 
 </shape>
