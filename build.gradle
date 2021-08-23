@@ -1,5 +1,10 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+ext {
+    JAVA_HOME = 'JAVA_HOME="/usr/lib/jvm/open-jdk"'
+}// Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
+    ext {
+        JAVA_HOME = 'JAVA_HOME="/usr/lib/jvm/open-jdk"'
+    }
     repositories {
         google()
         mavenCentral()

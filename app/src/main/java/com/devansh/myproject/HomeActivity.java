@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
 
 import com.devansh.myproject.adapter.FestivalAdapter;
 import com.devansh.myproject.model.Festival;
@@ -32,6 +33,16 @@ public class HomeActivity extends AppCompatActivity implements LifecycleOwner {
         rvFestivals = findViewById(R.id.rv_festivals);
         viewModelFestival = new ViewModelProvider(this).get(ViewModelFestival.class);
         viewModelFestival.getMutableLiveData().observe(this,festListUpdateObserver);
+        findViewById(R.id.fetch_data).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fetchData();
+            }
+        });
+    }
+
+    private void fetchData() {
+        viewModelFestival.updateData();
     }
 
     Observer<ArrayList<Festival>> festListUpdateObserver = new Observer<ArrayList<Festival>>() {

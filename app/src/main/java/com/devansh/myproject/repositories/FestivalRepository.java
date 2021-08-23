@@ -8,7 +8,9 @@ import java.util.ArrayList;
 
 public class FestivalRepository {
     private static FestivalRepository instance;
-    private ArrayList<Festival> data = new ArrayList<>();
+    MutableLiveData<ArrayList<Festival>> data;
+    private ArrayList<Festival> data1 = new ArrayList<>();
+    int last=0;
 
     public static FestivalRepository getInstance() {
         if (instance == null) {
@@ -18,13 +20,14 @@ public class FestivalRepository {
     }
 
     public MutableLiveData<ArrayList<Festival>> getFestivals() {
-        setData();
-        MutableLiveData<ArrayList<Festival>> data = new MutableLiveData<>();
-        data.setValue(this.data);
+        setData(last,last+2);
+        last+=2;
+        data = new MutableLiveData<>();
+        data.setValue(this.data1);
         return data;
     }
 
-    private void setData() {
+    private void setData(int a,int b) {
         String[] name = {"Diwali", "Holi", "Onam", "Maha Shivaratri", "Krishna Janmashtami",
                 "Makar Sankranti", "Ganesh Chaturthi", "Navratri – Dussehra – Durga Puja", "Rama Navami", "Ugadi"};
         String[] description = {
@@ -64,9 +67,20 @@ public class FestivalRepository {
                 "India",
 
         };
-        for (int i = 0; i < 10; i++) {
-            data.add(new Festival(imgUri[i], "Name : "+name[i],"Place : "+place[i], description[i]));
+        for (int i = a; i < b; i++) {
+            data1.add(new Festival(imgUri[i], "Name  : "+name[i],"Place : "+place[i], description[i]));
         }
+
+    }
+
+    public void updateData() {
+        if(last+2>10) {
+            data1.clear();
+            last=0;
+        }
+        setData(last, last+2);
+        last+=2;
+        data.setValue(data1);
 
     }
 }

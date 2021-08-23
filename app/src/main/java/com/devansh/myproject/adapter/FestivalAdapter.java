@@ -37,6 +37,7 @@ public class FestivalAdapter extends RecyclerView.Adapter<FestivalAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 
+        viewHolder.id.setText(String.valueOf(position+1));
         viewHolder.name.setText(festivals.get(position).getName());
         viewHolder.place.setText(festivals.get(position).getPlace());
         viewHolder.desc.setText(festivals.get(position).getDescription());
@@ -51,6 +52,7 @@ public class FestivalAdapter extends RecyclerView.Adapter<FestivalAdapter.ViewHo
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+        private TextView id;
         private TextView name;
         private TextView place;
         private TextView desc;
@@ -58,7 +60,7 @@ public class FestivalAdapter extends RecyclerView.Adapter<FestivalAdapter.ViewHo
 
         public ViewHolder(View view) {
             super(view);
-
+            id = view.findViewById(R.id.tv_fest_id);
             name = view.findViewById(R.id.tv_fest_name);
             place = view.findViewById(R.id.tv_fest_place);
             desc = view.findViewById(R.id.tv_fest_desc);

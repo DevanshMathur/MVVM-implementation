@@ -2,6 +2,10 @@ plugins {
     id 'com.android.application'
 }
 
+ext {
+    JAVA_HOME = 'JAVA_HOME="/usr/lib/jvm/open-jdk"'
+}
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"

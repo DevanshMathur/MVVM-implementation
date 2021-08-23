@@ -22,4 +22,8 @@ public class ViewModelFestival extends ViewModel {
         return festLiveData;
     }
 
+    public void updateData() {
+        festivalRepository.updateData();
+    }
+
 }

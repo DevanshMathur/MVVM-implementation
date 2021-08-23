@@ -19,6 +19,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText etPassword;
     Button btnLogin;
     Button btnRegister;
+    Button btnSkip;
 
 
     @Override
@@ -38,12 +39,18 @@ public class LoginActivity extends AppCompatActivity {
                 register();
             }
         });
+        btnSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                skip();
+            }
+        });
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
             public void run() {
                 skip();
             }
-        },300);
+        },1000);
 
     }
 
@@ -62,6 +69,7 @@ public class LoginActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.et_password);
         btnLogin = findViewById(R.id.btn_login);
         btnRegister = findViewById(R.id.btn_register);
+        btnSkip = findViewById(R.id.btn_skip);
     }
 
     private void onLogin() {
