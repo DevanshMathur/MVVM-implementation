@@ -2,7 +2,9 @@ package com.devansh.myproject.model;
 
 import android.net.Uri;
 
-public class Festival {
+import java.io.Serializable;
+
+public class Festival implements Serializable {
     String uri;
     String name;
     String place;

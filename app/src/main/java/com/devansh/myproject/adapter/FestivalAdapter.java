@@ -1,14 +1,14 @@
 package com.devansh.myproject.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.lifecycle.MutableLiveData;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -34,16 +34,27 @@ public class FestivalAdapter extends RecyclerView.Adapter<FestivalAdapter.ViewHo
         return new ViewHolder(view);
     }
 
+    @SuppressLint("RecyclerView")
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(ViewHolder viewHolder, int position) {
 
         viewHolder.id.setText(String.valueOf(position+1));
         viewHolder.name.setText(festivals.get(position).getName());
         viewHolder.place.setText(festivals.get(position).getPlace());
-        viewHolder.desc.setText(festivals.get(position).getDescription());
+        String desc = festivals.get(position).getDescription();
+        if(desc.length() > 30) {
+            desc = desc.substring(0, 30)+"...";
+        }
+        viewHolder.desc.setText(desc);
         Glide.with(mContext)
                 .load(festivals.get(position).getUri())
                 .into(viewHolder.img);
+        viewHolder.festival.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onItemClickedListener.itemClicked(festivals.get(position));
+            }
+        });
     }
 
     @Override
@@ -57,6 +68,7 @@ public class FestivalAdapter extends RecyclerView.Adapter<FestivalAdapter.ViewHo
         private TextView place;
         private TextView desc;
         private ImageView img;
+        private CardView festival;
 
         public ViewHolder(View view) {
             super(view);
@@ -65,9 +77,18 @@ public class FestivalAdapter extends RecyclerView.Adapter<FestivalAdapter.ViewHo
             place = view.findViewById(R.id.tv_fest_place);
             desc = view.findViewById(R.id.tv_fest_desc);
             img = view.findViewById(R.id.iv_fest_img);
-
+            festival = view.findViewById(R.id.cv_festival);
         }
 
+    }
+    public void setOnItemClickedListener(OnItemClicked onItemClickedListener) {
+        this.onItemClickedListener = onItemClickedListener;
+    }
+
+    private OnItemClicked onItemClickedListener;
+
+    public interface OnItemClicked {
+        void itemClicked(Festival festival);
     }
 
 }
