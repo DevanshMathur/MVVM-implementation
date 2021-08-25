@@ -1,4 +1,4 @@
-package com.devansh.myproject;
+package com.devansh.myproject.home;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LifecycleOwner;
@@ -12,9 +12,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.devansh.myproject.adapter.FestivalAdapter;
-import com.devansh.myproject.model.Festival;
-import com.devansh.myproject.viewmodel.ViewModelFestival;
+import com.devansh.myproject.appUtils.AppUtils;
+import com.devansh.myproject.R;
+import com.devansh.myproject.festivalDetails.FestivalDetailsActivity;
+import com.devansh.myproject.home.adapter.FestivalAdapter;
+import com.devansh.myproject.home.model.Festival;
+import com.devansh.myproject.home.viewmodel.ViewModelFestival;
 
 import java.util.ArrayList;
 
@@ -22,6 +25,7 @@ public class HomeActivity extends AppCompatActivity implements LifecycleOwner, F
 
     Context context;
     RecyclerView rvFestivals;
+    static ArrayList<Festival> festivals = new ArrayList<>();
     FestivalAdapter festivalAdapter;
     ViewModelFestival viewModelFestival;
     FestivalAdapter.OnItemClicked onItemClicked;
@@ -33,6 +37,7 @@ public class HomeActivity extends AppCompatActivity implements LifecycleOwner, F
         context = this;
         onItemClicked = this;
         rvFestivals = findViewById(R.id.rv_festivals);
+        initializeView();
         viewModelFestival = new ViewModelProvider(this).get(ViewModelFestival.class);
         viewModelFestival.getMutableLiveData().observe(this,festListUpdateObserver);
         findViewById(R.id.btn_fetch_data).setVisibility(View.VISIBLE);
@@ -44,6 +49,10 @@ public class HomeActivity extends AppCompatActivity implements LifecycleOwner, F
         });
     }
 
+    private void initializeView() {
+
+    }
+
     private void fetchData() {
         viewModelFestival.updateData();
     }
@@ -51,6 +60,7 @@ public class HomeActivity extends AppCompatActivity implements LifecycleOwner, F
     Observer<ArrayList<Festival>> festListUpdateObserver = new Observer<ArrayList<Festival>>() {
         @Override
         public void onChanged(ArrayList<Festival> festivals) {
+            HomeActivity.festivals = festivals;
             festivalAdapter = new FestivalAdapter(context, festivals);
             festivalAdapter.setOnItemClickedListener(onItemClicked);
             rvFestivals.setLayoutManager(new LinearLayoutManager(context));
@@ -59,9 +69,10 @@ public class HomeActivity extends AppCompatActivity implements LifecycleOwner, F
     };
 
     @Override
-    public void itemClicked(Festival festival) {
-        Intent intent = new Intent(this,FestivalDetailsActivity.class);
-        intent.putExtra(AppUtils.FESTIVAL,festival);
+    public void itemClicked(int position) {
+        Intent intent = new Intent(this, FestivalDetailsActivity.class);
+        intent.putExtra(AppUtils.FESTIVAL,HomeActivity.festivals);
+        intent.putExtra(AppUtils.POSITION,position);
         startActivity(intent);
     }
 }

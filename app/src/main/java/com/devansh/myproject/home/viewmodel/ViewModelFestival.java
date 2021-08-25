@@ -1,10 +1,10 @@
-package com.devansh.myproject.viewmodel;
+package com.devansh.myproject.home.viewmodel;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.devansh.myproject.model.Festival;
-import com.devansh.myproject.repositories.FestivalRepository;
+import com.devansh.myproject.home.model.Festival;
+import com.devansh.myproject.home.repositories.FestivalRepository;
 
 import java.util.ArrayList;
 

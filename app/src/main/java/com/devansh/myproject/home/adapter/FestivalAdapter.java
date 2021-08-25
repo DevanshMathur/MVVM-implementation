@@ -1,4 +1,4 @@
-package com.devansh.myproject.adapter;
+package com.devansh.myproject.home.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.devansh.myproject.R;
-import com.devansh.myproject.model.Festival;
+import com.devansh.myproject.home.model.Festival;
 
 import java.util.ArrayList;
 
@@ -39,11 +39,11 @@ public class FestivalAdapter extends RecyclerView.Adapter<FestivalAdapter.ViewHo
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
 
         viewHolder.id.setText(String.valueOf(position+1));
-        viewHolder.name.setText(festivals.get(position).getName());
-        viewHolder.place.setText(festivals.get(position).getPlace());
+        viewHolder.name.setText("Name : " +festivals.get(position).getName());
+        viewHolder.place.setText("Place : "+festivals.get(position).getPlace());
         String desc = festivals.get(position).getDescription();
-        if(desc.length() > 30) {
-            desc = desc.substring(0, 30)+"...";
+        if(desc.length() > 60) {
+            desc = desc.substring(0, 60)+"...";
         }
         viewHolder.desc.setText(desc);
         Glide.with(mContext)
@@ -52,7 +52,7 @@ public class FestivalAdapter extends RecyclerView.Adapter<FestivalAdapter.ViewHo
         viewHolder.festival.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onItemClickedListener.itemClicked(festivals.get(position));
+                onItemClickedListener.itemClicked(position);
             }
         });
     }
@@ -88,7 +88,7 @@ public class FestivalAdapter extends RecyclerView.Adapter<FestivalAdapter.ViewHo
     private OnItemClicked onItemClickedListener;
 
     public interface OnItemClicked {
-        void itemClicked(Festival festival);
+        void itemClicked(int position);
     }
 
 }

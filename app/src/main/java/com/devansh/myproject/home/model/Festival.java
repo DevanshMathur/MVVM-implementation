@@ -1,6 +1,4 @@
-package com.devansh.myproject.model;
-
-import android.net.Uri;
+package com.devansh.myproject.home.model;
 
 import java.io.Serializable;
 
