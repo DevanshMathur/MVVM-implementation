@@ -11,8 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 
 import com.devansh.myproject.appUtils.AppUtils;
@@ -28,7 +26,7 @@ public class HomeActivity extends AppCompatActivity implements LifecycleOwner, F
 
     Context context;
     RecyclerView rvFestivals;
-    static ArrayList<Festival> festivals = new ArrayList<>();
+    ArrayList<Festival> festivals = new ArrayList<>();
     FestivalAdapter festivalAdapter;
     ViewModelFestival viewModelFestival;
     FestivalAdapter.OnItemClicked onItemClicked;
@@ -46,9 +44,8 @@ public class HomeActivity extends AppCompatActivity implements LifecycleOwner, F
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                LinearLayoutManager linearLayoutManager = (LinearLayoutManager) rvFestivals.getLayoutManager();
-                lastVisibleItem = linearLayoutManager.findLastCompletelyVisibleItemPosition();
-                if(lastVisibleItem == size-1 && size < 9 ) {
+                lastVisibleItem = ((LinearLayoutManager) rvFestivals.getLayoutManager()).findLastCompletelyVisibleItemPosition();
+                if(lastVisibleItem == size-1 && size < 10 ) {
                     fetchData();
                 }
 
@@ -59,9 +56,18 @@ public class HomeActivity extends AppCompatActivity implements LifecycleOwner, F
         viewModelFestival.getMutableLiveData().observe(this,festListUpdateObserver);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        lastVisibleItem = ((LinearLayoutManager) rvFestivals.getLayoutManager()).findLastCompletelyVisibleItemPosition();
+        if(lastVisibleItem == size-1 && size < 9 ) {
+            fetchData();
+        }
+    }
+
     private void initializeView() {
         TextView title = findViewById(R.id.tv_title);
-        title.setText("Home");
+        title.setText(R.string.title_home);
         festivalAdapter = new FestivalAdapter(context, festivals);
         festivalAdapter.setOnItemClickedListener(onItemClicked);
         rvFestivals.setLayoutManager(new LinearLayoutManager(context));
@@ -75,16 +81,16 @@ public class HomeActivity extends AppCompatActivity implements LifecycleOwner, F
     Observer<ArrayList<Festival>> festListUpdateObserver = new Observer<ArrayList<Festival>>() {
         @Override
         public void onChanged(ArrayList<Festival> festivals) {
-            HomeActivity.festivals = festivals;
+            HomeActivity.this.festivals = festivals;
             HomeActivity.this.size = festivals.size();
-            festivalAdapter.setFestivalsList(HomeActivity.festivals);
+            festivalAdapter.setFestivalsList(HomeActivity.this.festivals);
         }
     };
 
     @Override
     public void itemClicked(int position) {
         Intent intent = new Intent(this, FestivalDetailsActivity.class);
-        intent.putExtra(AppUtils.FESTIVAL,HomeActivity.festivals);
+        intent.putExtra(AppUtils.FESTIVAL,HomeActivity.this.festivals);
         intent.putExtra(AppUtils.POSITION,position);
         startActivity(intent);
     }

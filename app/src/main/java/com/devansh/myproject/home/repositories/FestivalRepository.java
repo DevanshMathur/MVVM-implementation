@@ -20,8 +20,10 @@ public class FestivalRepository {
     }
 
     public MutableLiveData<ArrayList<Festival>> getFestivals() {
-        setData(last, last + 2);
-        last += 2;
+        if(last + 2 < 11 ) {
+            setData(last, last + 2);
+            last += 2;
+        }
         data = new MutableLiveData<>();
         data.setValue(this.data1);
         return data;
@@ -74,13 +76,10 @@ public class FestivalRepository {
     }
 
     public void updateData() {
-        if (last + 2 > 10) {
-            data1.clear();
-            last = 0;
+        if (last + 1 < 11) {
+            setData(last, last + 1);
+            last += 1;
+            data.setValue(data1);
         }
-        setData(last, last + 2);
-        last += 2;
-        data.setValue(data1);
-
     }
 }
