@@ -1,5 +1,6 @@
 package com.devansh.myproject.home.repositories;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.devansh.myproject.home.model.Festival;
@@ -19,7 +20,7 @@ public class FestivalRepository {
         return instance;
     }
 
-    public MutableLiveData<ArrayList<Festival>> getFestivals() {
+    public LiveData<ArrayList<Festival>> getFestivals() {
         if(last + 2 < 11 ) {
             setData(last, last + 2);
             last += 2;

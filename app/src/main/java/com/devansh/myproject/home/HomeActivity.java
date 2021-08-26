@@ -24,7 +24,6 @@ import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity implements LifecycleOwner, FestivalAdapter.OnItemClicked {
 
-    Context context;
     RecyclerView rvFestivals;
     ArrayList<Festival> festivals = new ArrayList<>();
     FestivalAdapter festivalAdapter;
@@ -37,7 +36,6 @@ public class HomeActivity extends AppCompatActivity implements LifecycleOwner, F
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        context = this;
         onItemClicked = this;
         rvFestivals = findViewById(R.id.rv_festivals);
         rvFestivals.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -53,7 +51,11 @@ public class HomeActivity extends AppCompatActivity implements LifecycleOwner, F
         });
         initializeView();
         viewModelFestival = new ViewModelProvider(this).get(ViewModelFestival.class);
-        viewModelFestival.getMutableLiveData().observe(this,festListUpdateObserver);
+        viewModelFestival.getMutableLiveData().observe(this, festivals -> {
+            HomeActivity.this.festivals = festivals;
+            HomeActivity.this.size = festivals.size();
+            festivalAdapter.setFestivalsList(HomeActivity.this.festivals);
+        });
     }
 
     @Override
@@ -68,9 +70,9 @@ public class HomeActivity extends AppCompatActivity implements LifecycleOwner, F
     private void initializeView() {
         TextView title = findViewById(R.id.tv_title);
         title.setText(R.string.title_home);
-        festivalAdapter = new FestivalAdapter(context, festivals);
+        festivalAdapter = new FestivalAdapter(this, festivals);
         festivalAdapter.setOnItemClickedListener(onItemClicked);
-        rvFestivals.setLayoutManager(new LinearLayoutManager(context));
+        rvFestivals.setLayoutManager(new LinearLayoutManager(this));
         rvFestivals.setAdapter(festivalAdapter);
     }
 
@@ -78,14 +80,14 @@ public class HomeActivity extends AppCompatActivity implements LifecycleOwner, F
         viewModelFestival.updateData();
     }
 
-    Observer<ArrayList<Festival>> festListUpdateObserver = new Observer<ArrayList<Festival>>() {
-        @Override
-        public void onChanged(ArrayList<Festival> festivals) {
-            HomeActivity.this.festivals = festivals;
-            HomeActivity.this.size = festivals.size();
-            festivalAdapter.setFestivalsList(HomeActivity.this.festivals);
-        }
-    };
+//    Observer<ArrayList<Festival>> festListUpdateObserver = new Observer<ArrayList<Festival>>() {
+//        @Override
+//        public void onChanged(ArrayList<Festival> festivals) {
+//            HomeActivity.this.festivals = festivals;
+//            HomeActivity.this.size = festivals.size();
+//            festivalAdapter.setFestivalsList(HomeActivity.this.festivals);
+//        }
+//    };
 
     @Override
     public void itemClicked(int position) {

@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyProject">
         <activity
+            android:name=".registration.RegistrationActivity"
+            android:exported="true" />
+        <activity
             android:name=".festivalDetails.FestivalDetailsActivity"
             android:exported="true" />
         <activity android:name=".home.HomeActivity" />
