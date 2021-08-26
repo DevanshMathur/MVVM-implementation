@@ -9,13 +9,17 @@ import android.os.Looper;
 
 import com.devansh.myproject.R;
 import com.devansh.myproject.login.LoginActivity;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class SplashActivity extends FragmentActivity {
+
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+//        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
             public void run() {

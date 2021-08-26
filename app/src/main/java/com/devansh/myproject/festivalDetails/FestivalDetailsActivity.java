@@ -21,7 +21,6 @@ public class FestivalDetailsActivity extends AppCompatActivity {
 
     TextView title;
     ImageView backBtn;
-    Button fetchBtn;
     Button previous;
     Button next;
     ArrayList<Festival> festival;
@@ -43,10 +42,8 @@ public class FestivalDetailsActivity extends AppCompatActivity {
     private void binding() {
         title = findViewById(R.id.tv_title);
         backBtn = findViewById(R.id.iv_back);
-        fetchBtn = findViewById(R.id.btn_fetch_data);
         previous = findViewById(R.id.previous);
         next = findViewById(R.id.next);
-        fetchBtn.setVisibility(View.GONE);
         backBtn.setVisibility(View.VISIBLE);
     }
 

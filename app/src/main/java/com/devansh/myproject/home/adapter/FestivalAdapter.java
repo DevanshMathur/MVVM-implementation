@@ -27,6 +27,11 @@ public class FestivalAdapter extends RecyclerView.Adapter<FestivalAdapter.ViewHo
         mContext = context;
     }
 
+    public void setFestivalsList(ArrayList<Festival> festivals) {
+        this.festivals = festivals;
+        notifyDataSetChanged();
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext())
@@ -42,8 +47,8 @@ public class FestivalAdapter extends RecyclerView.Adapter<FestivalAdapter.ViewHo
         viewHolder.name.setText("Name : " +festivals.get(position).getName());
         viewHolder.place.setText("Place : "+festivals.get(position).getPlace());
         String desc = festivals.get(position).getDescription();
-        if(desc.length() > 60) {
-            desc = desc.substring(0, 60)+"...";
+        if(desc.length() > 130) {
+            desc = desc.substring(0, 130)+"...";
         }
         viewHolder.desc.setText(desc);
         Glide.with(mContext)
