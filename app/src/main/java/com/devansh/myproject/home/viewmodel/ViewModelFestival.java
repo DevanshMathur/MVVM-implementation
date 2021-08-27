@@ -1,7 +1,6 @@
 package com.devansh.myproject.home.viewmodel;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.devansh.myproject.home.model.Festival;
@@ -17,7 +16,7 @@ public class ViewModelFestival extends ViewModel {
         festivalRepository = new FestivalRepository().getInstance();
     }
 
-    public LiveData<ArrayList<Festival>> getMutableLiveData() {
+    public LiveData<ArrayList<Festival>> getLiveData() {
         festLiveData = festivalRepository.getFestivals();
         return festLiveData;
     }

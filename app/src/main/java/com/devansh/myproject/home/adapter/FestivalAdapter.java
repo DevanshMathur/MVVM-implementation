@@ -54,12 +54,6 @@ public class FestivalAdapter extends RecyclerView.Adapter<FestivalAdapter.ViewHo
         Glide.with(mContext)
                 .load(festivals.get(position).getUri())
                 .into(viewHolder.img);
-        viewHolder.festival.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onItemClickedListener.itemClicked(position);
-            }
-        });
     }
 
     @Override
@@ -86,14 +80,4 @@ public class FestivalAdapter extends RecyclerView.Adapter<FestivalAdapter.ViewHo
         }
 
     }
-    public void setOnItemClickedListener(OnItemClicked onItemClickedListener) {
-        this.onItemClickedListener = onItemClickedListener;
-    }
-
-    private OnItemClicked onItemClickedListener;
-
-    public interface OnItemClicked {
-        void itemClicked(int position);
-    }
-
 }
