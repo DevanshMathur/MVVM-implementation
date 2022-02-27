@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:background="@drawable/border"
+    app:cardCornerRadius="10dp"
+    android:id="@+id/cv_festival">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_fest_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Festival id"
+            android:layout_marginLeft="10dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/tv_fest_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Festival Name"
+            android:layout_marginLeft="10dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/tv_fest_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Festival Name"
+            android:layout_marginLeft="10dp"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentEnd="true"
+            android:padding="10dp">
+            <ImageView
+                android:id="@+id/iv_fest_img"
+                android:layout_width="100dp"
+                android:layout_height="100sp"
+                android:src="@drawable/india" />
+            <TextView
+                android:id="@+id/tv_fest_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:textStyle="italic"
+                android:justificationMode="inter_word"
+                android:text="Festival Description "
+                android:visibility="visible" />
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
